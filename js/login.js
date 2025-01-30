@@ -1,5 +1,6 @@
 let usersJSONPath = '../assets/data/users.json';
-
+cargarJSONEnLocalStorage();
+document.getElementById("login-button").addEventListener("click",validarCredenciales());
 function cargarJSONEnLocalStorage() {
     fetch(usersJSONPath)
         .then(response => {
@@ -19,7 +20,16 @@ function cargarJSONEnLocalStorage() {
 
 // Función que valida el usuario y la contraseña
 function validarCredenciales() {
-
+    let datos = JSON.parse(localStorage.getItem("usuarios"));
+    let usuarioNuevo = document.getElementById("username");
+    let contraseñaNueva = document.getElementById("password");
+    if(usuarioNuevo == datos.usuarios[0].username && contraseñaNueva == datos.usuarios[0].password ){
+        window.location.href= "juego.html";
+    } if(usuarioNuevo == datos.usuarios[1].username && contraseñaNueva == datos.usuarios[1].password ){
+        window.location.href= "juego.html";
+    }else{
+        document.getElementById("error-message").textContent="Usuario o Contraseña Incorrectos";
+    }
 }
 
 
